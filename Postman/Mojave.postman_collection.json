@@ -1,0 +1,327 @@
+{
+	"info": {
+		"_postman_id": "8bd673d4-9615-4e07-83c5-96673b0988b2",
+		"name": "Mojave",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains username already taken error\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.username).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "Roma",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "ivasyuk.roman@chnu.edu.ua",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "MyVeryStrongPass23",
+							"type": "text"
+						},
+						{
+							"key": "confirm_password",
+							"value": "MyVeryStrongPass23",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test login nevative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 403\", function () {\r",
+							"    pm.response.to.have.status(403);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains error\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"     pm.expect(jsonData.general).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "jkdsnfksfdn@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "2012210",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test login positive",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const schema = {\r",
+							"\t\"type\": \"object\",\r",
+							"    \"required\": [\"user_id\", \"token\", \"refresh_token\"]\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response schema validation\", function () {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "ivasyuk.roman@chnu.edu.ua",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "MyVeryStrongPass23",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Forgot password",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response contains error\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"     pm.expect(jsonData.general).to.exist;\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "romaromaroma@gmail.com",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/v1/auth/forgot_password",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"forgot_password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const schema = {\r",
+							"\t\"type\": \"array\",\r",
+							"    \"items\": {\r",
+							"        \"type\": \"object\",\r",
+							"        \"required\": [\"createdAt\", \"username\", \"email\", \"userId\"]\r",
+							"    }\r",
+							"}\r",
+							"\r",
+							"pm.test('Status code is 200', function() {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response schema validation\", function () {\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get user by id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response contains error that document not exists\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"     pm.expect(jsonData.error).to.eql('Document not exist');\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/v1/users/A9uK8tTygafXqQBJYmKCP9g75MH2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"A9uK8tTygafXqQBJYmKCP9g75MH2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "old_password",
+			"value": "123456"
+		}
+	]
+}
