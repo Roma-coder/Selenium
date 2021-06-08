@@ -16,9 +16,9 @@
 							"    pm.response.to.have.status(400);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Response contains username already taken error\", function() {\r",
+							"pm.test(\"Email already taken error\", function() {\r",
 							"    var jsonData = pm.response.json();\r",
-							"    pm.expect(jsonData.username).to.exist;\r",
+							"    pm.expect(jsonData.email).to.eql('Email адреса вже зайнята!');\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -33,7 +33,7 @@
 					"urlencoded": [
 						{
 							"key": "username",
-							"value": "Roma",
+							"value": "Romax",
 							"type": "text"
 						},
 						{
@@ -83,7 +83,7 @@
 							"\r",
 							"pm.test(\"Response contains error\", function() {\r",
 							"    var jsonData = pm.response.json();\r",
-							"     pm.expect(jsonData.general).to.exist;\r",
+							"    pm.expect(jsonData.general).to.eql('Неправильний email або пароль');\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -143,6 +143,11 @@
 							"\r",
 							"pm.test(\"Response schema validation\", function () {\r",
 							"    pm.response.to.have.jsonSchema(schema);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response user_id is correct\", function() {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.user_id).to.eql('t0I3jKTUytg5Jgt3xuFQy5l70rx2');\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -195,9 +200,9 @@
 							"    pm.response.to.have.status(404);\r",
 							"});\r",
 							"\r",
-							"pm.test(\"Response contains error\", function() {\r",
+							"pm.test(\"Response contains email not found error\", function() {\r",
 							"    var jsonData = pm.response.json();\r",
-							"     pm.expect(jsonData.general).to.exist;\r",
+							"    pm.expect(jsonData.general).to.eql('Не вдалося знайти користувача з такою поштою');\r",
 							"});"
 						],
 						"type": "text/javascript"
@@ -290,7 +295,7 @@
 						"exec": [
 							"pm.test(\"Response contains error that document not exists\", function() {\r",
 							"    var jsonData = pm.response.json();\r",
-							"     pm.expect(jsonData.error).to.eql('Document not exist');\r",
+							"    pm.expect(jsonData.error).to.eql('Document not exist');\r",
 							"});"
 						],
 						"type": "text/javascript"
